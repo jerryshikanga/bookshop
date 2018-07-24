@@ -20,7 +20,7 @@ class Author(ModelGetFieldsMixin, models.Model):
         return self.name
 
     def get_absolute_url(self):
-        return reverse_lazy("books:author_detail", kwargs={"id":self.id})
+        return reverse_lazy("books:author_detail", kwargs={"pk":self.pk})
 
 
 class Publisher(ModelGetFieldsMixin, models.Model):
@@ -35,7 +35,7 @@ class Publisher(ModelGetFieldsMixin, models.Model):
         return self.name
 
     def get_absolute_url(self):
-        return reverse_lazy("books:publisher_detail", kwargs={"id":self.id})
+        return reverse_lazy("books:publisher_detail", kwargs={"pk":self.pk})
 
 
 class Book(ModelGetFieldsMixin, models.Model):
@@ -58,4 +58,4 @@ class Book(ModelGetFieldsMixin, models.Model):
         return self.name
 
     def get_absolute_url(self):
-        return reverse_lazy("books:book_detail", kwargs={"id":self.id})
+        return reverse_lazy("books:book_detail", kwargs={"pk":self.pk})

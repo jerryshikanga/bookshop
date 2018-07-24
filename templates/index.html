@@ -15,8 +15,8 @@
               <div class="pd-25 d-flex align-items-center">
                 <i class="ion ion-earth tx-60 lh-0 tx-white op-7"></i>
                 <div class="mg-l-20">
-                  <p class="tx-10 tx-spacing-1 tx-mont tx-medium tx-uppercase tx-white-8 mg-b-10">Today's Distributions</p>
-                  <p class="tx-24 tx-white tx-lato tx-bold mg-b-2 lh-1">1,975,224</p>
+                  <p class="tx-10 tx-spacing-1 tx-mont tx-medium tx-uppercase tx-white-8 mg-b-10">Today's Sales</p>
+                  <p class="tx-24 tx-white tx-lato tx-bold mg-b-2 lh-1">{{ sales_today_sum }}</p>
                 </div>
               </div>
             </div>
@@ -26,8 +26,8 @@
               <div class="pd-25 d-flex align-items-center">
                 <i class="ion ion-bag tx-60 lh-0 tx-white op-7"></i>
                 <div class="mg-l-20">
-                  <p class="tx-10 tx-spacing-1 tx-mont tx-medium tx-uppercase tx-white-8 mg-b-10">Successful Distributions</p>
-                  <p class="tx-24 tx-white tx-lato tx-bold mg-b-2 lh-1">{{ successful_distributions }}</p>
+                  <p class="tx-10 tx-spacing-1 tx-mont tx-medium tx-uppercase tx-white-8 mg-b-10">Purchases Today</p>
+                  <p class="tx-24 tx-white tx-lato tx-bold mg-b-2 lh-1">{{ purchases_today_sum }}</p>
                 </div>
               </div>
             </div>
@@ -37,8 +37,8 @@
               <div class="pd-25 d-flex align-items-center">
                 <i class="ion ion-monitor tx-60 lh-0 tx-white op-7"></i>
                 <div class="mg-l-20">
-                  <p class="tx-10 tx-spacing-1 tx-mont tx-medium tx-uppercase tx-white-8 mg-b-10">Total Refugees</p>
-                  <p class="tx-24 tx-white tx-lato tx-bold mg-b-2 lh-1">{{ num_refugees }}</p>
+                  <p class="tx-10 tx-spacing-1 tx-mont tx-medium tx-uppercase tx-white-8 mg-b-10">Total Customers</p>
+                  <p class="tx-24 tx-white tx-lato tx-bold mg-b-2 lh-1">{{ customers.count }}</p>
                 </div>
               </div>
             </div>
@@ -48,8 +48,8 @@
               <div class="pd-25 d-flex align-items-center">
                 <i class="ion ion-clock tx-60 lh-0 tx-white op-7"></i>
                 <div class="mg-l-20">
-                  <p class="tx-10 tx-spacing-1 tx-mont tx-medium tx-uppercase tx-white-8 mg-b-10">Total Agents</p>
-                  <p class="tx-24 tx-white tx-lato tx-bold mg-b-2 lh-1">{{ num_agents }}</p>
+                  <p class="tx-10 tx-spacing-1 tx-mont tx-medium tx-uppercase tx-white-8 mg-b-10">Total WholeSellers</p>
+                  <p class="tx-24 tx-white tx-lato tx-bold mg-b-2 lh-1">{{ whole_sellers.count }}</p>
                 </div>
               </div>
             </div>
@@ -62,45 +62,37 @@
             <div class="card bd-0 shadow-base pd-30 mg-t-20">
               <div class="d-flex align-items-center justify-content-between mg-b-30">
                 <div>
-                  <h6 class="tx-13 tx-uppercase tx-inverse tx-semibold tx-spacing-1">Newly Registered Refugees</h6>
+                  <h6 class="tx-13 tx-uppercase tx-inverse tx-semibold tx-spacing-1">Newly Registered Customers</h6>
                 </div>
-                <a href="" class="btn btn-outline-info btn-oblong tx-11 tx-uppercase tx-mont tx-medium tx-spacing-1 pd-x-30 bd-2">See more</a>
+                <a href="{% url 'customer:customer_list' %}" class="btn btn-outline-info btn-oblong tx-11 tx-uppercase tx-mont tx-medium tx-spacing-1 pd-x-30 bd-2">See more</a>
               </div><!-- d-flex -->
 
               <table class="table table-valign-middle mg-b-0">
                 <tbody>
 
-                {% for refugee in refugee_latest %}
+                {% for customer in customers_latest %}
                   <tr>
-                    <td class="pd-l-0-force">
-                      <img src="http://via.placeholder.com/280x280" class="wd-40 rounded-circle" alt="{{ refugee.name }}">
-                    </td>
-                    <td>
-                      <h6 class="tx-inverse tx-14 mg-b-0">{{ refugee.name }}</h6>
-                      <span class="tx-12">{{ refugee.telephone }}</span>
-                    </td>
-                    <td>{{ refugee.date_time_registered }}</td>
-                    <td><span id="sparkline1">{{ refugee.gender }}</span></td>
-                    <td class="pd-r-0-force tx-center"><a href="#" class="tx-gray-600"><i class="icon ion-more tx-18 lh-0"></i></a></td>
+                    <td> {{ customer.name }} </td>
+                    <td>{{ customer.address }}</td>
                   </tr>
                 {% endfor %}
                 </tbody>
               </table>
             </div><!-- card -->
 
-            <div class="card shadow-base card-body pd-25 bd-0 mg-t-20">
-              <div class="row">
-                <div class="col-sm-12">
-                  <h6 class="card-title tx-uppercase tx-12">Distribution Success Rate</h6>
-                  <p class="display-4 tx-medium tx-inverse mg-b-5 tx-lato">{{ distribution_rate }}%</p>
-                  <div class="progress mg-b-10">
-                    <div class="progress-bar bg-primary progress-bar-xs wd-30p" role="progressbar" aria-valuenow="{{ distribution_rate }}" aria-valuemin="0" aria-valuemax="100"></div>
-                  </div><!-- progress -->
-                  <p class="tx-12">This figure show total allocations against number which has been collected.</p>
-                  <p class="tx-11 lh-3 mg-b-0">You can also use other progress variants..</p>
-                </div><!-- col-6 -->
-              </div><!-- row -->
-            </div><!-- card -->
+{#            <div class="card shadow-base card-body pd-25 bd-0 mg-t-20">#}
+{#              <div class="row">#}
+{#                <div class="col-sm-12">#}
+{#                  <h6 class="card-title tx-uppercase tx-12">Distribution Success Rate</h6>#}
+{#                  <p class="display-4 tx-medium tx-inverse mg-b-5 tx-lato">{{ distribution_rate }}%</p>#}
+{#                  <div class="progress mg-b-10">#}
+{#                    <div class="progress-bar bg-primary progress-bar-xs wd-30p" role="progressbar" aria-valuenow="{{ distribution_rate }}" aria-valuemin="0" aria-valuemax="100"></div>#}
+{#                  </div><!-- progress -->#}
+{#                  <p class="tx-12">This figure show total allocations against number which has been collected.</p>#}
+{#                  <p class="tx-11 lh-3 mg-b-0">You can also use other progress variants..</p>#}
+{#                </div><!-- col-6 -->#}
+{#              </div><!-- row -->#}
+{#            </div><!-- card -->#}
 
 
           </div><!-- col-9 -->

@@ -1,1 +1,55 @@
-{{ form.as_p }}
+{% extends 'base_dashboard.html' %}
+
+{% load widget_tweaks %}
+{% load static %}
+
+{% block content %}
+<div class="br-mainpanel">
+  <div class="br-pageheader pd-y-15 pd-l-20">
+    <nav class="breadcrumb pd-0 mg-0 tx-12">{{ site_title }} / Author / Update</nav>
+  </div><!-- br-pageheader -->
+  <div class="d-sm-flex align-items-center pd-t-15 pd-sm-t-25 pd-x-20 pd-sm-x-30">
+    <i class="icon ion-ios-filing-outline tx-70 lh-0 tx-gray-800"></i>
+    <div class="pd-sm-l-20">
+      <h4 class="tx-gray-800 mg-b-5">Update Author</h4>
+      <p class="mg-b-0">Update author {{ object.name }}</p>
+    </div>
+  </div><!-- d-flex -->
+
+  <div class="br-pagebody">
+    <!-- this is where your contents will be added -->
+      <form method="post" action="{% url 'books:author_update' object.pk %}" class="form">
+        {% csrf_token %}
+        {% for hidden_field in form.hidden_field  %}
+            <span class="text-warning">{{ hidden_field.errors|safe }}</span>
+            {{ hidden_field }}
+        {% endfor %}
+        {% for visible_field in form.visible_fields %}
+            <div class="form-group">
+                {{ visible_field.label_tag }}
+                {{ visible_field }}
+                {% if visible_field.help_text %}
+                    <span class="text-info">{{ visible_field.help_text|safe }}</span>
+                {% endif %}
+                {% if visible_field.errors %}
+                    <span class="text-warning">{{ visible_field.errors|safe }}</span>
+                {% endif %}
+            </div><!-- form-group -->
+        {% endfor %}
+        <button type="submit" class="btn btn-info">Submit</button>
+      <span class="pull-right"><button type="reset" class="btn btn-warning">Reset</button></span>
+    </form>
+  </div><!-- br-pagebody -->
+
+</div><!-- br-mainpanel -->
+{% endblock %}
+
+{% block scripts %}
+
+    <script type="text/javascript" src="{% static 'lib/select2/js/select2.min.js' %}"></script>
+    <script type="text/javascript">
+        $("select").addClass("form-control select2");
+        $("input").addClass("form-control");
+    </script>
+
+{% endblock %}

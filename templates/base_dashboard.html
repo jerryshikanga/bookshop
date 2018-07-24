@@ -41,46 +41,77 @@
             <span class="menu-item-label">Dashboard</span>
           </div><!-- menu-item -->
         </a><!-- br-menu-link -->
-        {% if perms.food.custom_can_add_food %}
-        <a href="{% url 'food:list' %}" class="br-menu-link">
+
+        <a href="{% url 'books:list_book' %}" class="br-menu-link">
           <div class="br-menu-item">
             <i class="menu-item-icon icon ion-ios-filing-outline tx-24"></i>
-            <span class="menu-item-label">Food and Resources</span>
+            <span class="menu-item-label">Books List</span>
           </div><!-- menu-item -->
         </a><!-- br-menu-link -->
-          {% endif %}
-        {% if perms.distribution.can_allocate_distribution %}
-        <a href="{% url 'food:unit_list' %}" class="br-menu-link">
+
+
+        <a href="{% url 'books:author_list' %}" class="br-menu-link">
           <div class="br-menu-item">
             <i class="menu-item-icon icon ion-ios-filing-outline tx-24"></i>
-            <span class="menu-item-label">Distribution Units</span>
+            <span class="menu-item-label">Authors</span>
           </div><!-- menu-item -->
         </a><!-- br-menu-link -->
-          {% endif %}
-        {% if perms.distribution.can_clear_distribution %}
-        <a href="{% url 'distribution:list' %}" class="br-menu-link">
+
+
+        <a href="{% url 'books:publisher_list' %}" class="br-menu-link">
           <div class="br-menu-item">
             <i class="menu-item-icon icon ion-ios-filing-outline tx-24"></i>
-            <span class="menu-item-label">Distribution</span>
+            <span class="menu-item-label">Publishers</span>
           </div><!-- menu-item -->
         </a><!-- br-menu-link -->
-        {% endif %}
-        {% if perms.refugee.custom_can_add_refugee %}
-        <a href="{% url 'refugee:list' %}" class="br-menu-link">
+
+
+        <a href="{% url 'customer:customer_list' %}" class="br-menu-link">
           <div class="br-menu-item">
             <i class="menu-item-icon ion-ios-people tx-24"></i>
-            <span class="menu-item-label">Refugees </span>
+            <span class="menu-item-label">Customers </span>
           </div><!-- menu-item -->
         </a><!-- br-menu-link -->
-        {% endif %}
-        {% if perms.accounts.custom_can_add_user %}
-        <a href="{% url 'account:register_user' %}" class="br-menu-link">
+
+
+        <a href="{% url 'whole_seller:whole_seller_list' %}" class="br-menu-link">
           <div class="br-menu-item">
               <i class="fa fa-user"></i>
-            <span class="menu-item-label">Register System User </span>
+            <span class="menu-item-label">WholeSalers </span>
           </div><!-- menu-item -->
         </a><!-- br-menu-link -->
-        {% endif %}
+
+
+          <a href="{% url 'transactions:sale_list' %}" class="br-menu-link">
+          <div class="br-menu-item">
+              <i class="fa fa-user"></i>
+            <span class="menu-item-label">Sales</span>
+          </div><!-- menu-item -->
+        </a><!-- br-menu-link -->
+
+          <a href="{% url 'transactions:purchase_list' %}" class="br-menu-link">
+          <div class="br-menu-item">
+              <i class="fa fa-user"></i>
+            <span class="menu-item-label">Purchases </span>
+          </div><!-- menu-item -->
+        </a><!-- br-menu-link -->
+
+
+          <a href="{% url 'transactions:sale_return_list' %}" class="br-menu-link">
+          <div class="br-menu-item">
+              <i class="fa fa-user"></i>
+            <span class="menu-item-label">Sale Returns </span>
+          </div><!-- menu-item -->
+        </a><!-- br-menu-link -->
+
+
+          <a href="{% url 'transactions:purchase_return_list' %}" class="br-menu-link">
+          <div class="br-menu-item">
+              <i class="fa fa-user"></i>
+            <span class="menu-item-label">Purchase Returns </span>
+          </div><!-- menu-item -->
+        </a><!-- br-menu-link -->
+
       </div><!-- br-sideleft-menu -->
 
       <label class="sidebar-label pd-x-15 mg-t-25 mg-b-20 tx-info op-9">Information Summary</label>
@@ -88,29 +119,29 @@
       <div class="info-list">
         <div class="d-flex align-items-center justify-content-between pd-x-15">
           <div>
-            <p class="tx-10 tx-roboto tx-uppercase tx-spacing-1 tx-white op-3 mg-b-2 space-nowrap">Number of Refugees</p>
-            <h5 class="tx-lato tx-white tx-normal mg-b-0">{{ num_refugees }}</h5>
+            <p class="tx-10 tx-roboto tx-uppercase tx-spacing-1 tx-white op-3 mg-b-2 space-nowrap">Number of Sales Today</p>
+            <h5 class="tx-lato tx-white tx-normal mg-b-0">{{ sales_today.count }}</h5>
           </div>
         </div><!-- d-flex -->
 
         <div class="d-flex align-items-center justify-content-between pd-x-15 mg-t-20">
           <div>
-            <p class="tx-10 tx-roboto tx-uppercase tx-spacing-1 tx-white op-3 mg-b-2 space-nowrap">Number of Supervisors</p>
-            <h5 class="tx-lato tx-white tx-normal mg-b-0">{{ num_agents }}</h5>
+            <p class="tx-10 tx-roboto tx-uppercase tx-spacing-1 tx-white op-3 mg-b-2 space-nowrap">Number of Purchases Today</p>
+            <h5 class="tx-lato tx-white tx-normal mg-b-0">{{ purchases_today.count }}</h5>
           </div>
         </div><!-- d-flex -->
 
         <div class="d-flex align-items-center justify-content-between pd-x-15 mg-t-20">
           <div>
-            <p class="tx-10 tx-roboto tx-uppercase tx-spacing-1 tx-white op-3 mg-b-2 space-nowrap">Food Types Available</p>
-            <h5 class="tx-lato tx-white tx-normal mg-b-0">{{ num_foods }}</h5>
+            <p class="tx-10 tx-roboto tx-uppercase tx-spacing-1 tx-white op-3 mg-b-2 space-nowrap">Total Books</p>
+            <h5 class="tx-lato tx-white tx-normal mg-b-0">{{ books.count }}</h5>
           </div>
         </div><!-- d-flex -->
 
         <div class="d-flex align-items-center justify-content-between pd-x-15 mg-t-20">
           <div>
-            <p class="tx-10 tx-roboto tx-uppercase tx-spacing-1 tx-white op-3 mg-b-2 space-nowrap">Number of Distribution</p>
-            <h5 class="tx-lato tx-white tx-normal mg-b-0">{{ num_distribution }}</h5>
+            <p class="tx-10 tx-roboto tx-uppercase tx-spacing-1 tx-white op-3 mg-b-2 space-nowrap">Customer</p>
+            <h5 class="tx-lato tx-white tx-normal mg-b-0">{{ customer.count }}</h5>
           </div>
         </div><!-- d-flex -->
       </div><!-- info-lst -->
@@ -141,7 +172,7 @@
             </a>
             <div class="dropdown-menu dropdown-menu-header wd-200">
               <ul class="list-unstyled user-profile-nav">
-                <li><a href="{% url 'account:profile' %}"><i class="icon ion-ios-person"></i> Edit Profile</a></li>
+                <li><a href="{% url 'accounts:profile' %}"><i class="icon ion-ios-person"></i> Edit Profile</a></li>
                 <li><a href="{% url 'password_change' %}"><i class="icon ion-ios-gear"></i> Change Password</a></li>
                 <li><a href="{% url 'logout' %}"><i class="icon ion-power"></i> Sign Out</a></li>
               </ul>
