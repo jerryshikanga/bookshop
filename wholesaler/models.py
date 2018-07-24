@@ -1,4 +1,5 @@
 from django.db import models
+from django.urls import reverse_lazy
 
 
 # Create your models here.
@@ -13,3 +14,6 @@ class WholeSeller(models.Model):
 
     def __str__(self):
         return self.name
+
+    def get_absolute_url(self):
+        return reverse_lazy("whole_seller:whole_seller_detail", kwargs={"id":self.id})
