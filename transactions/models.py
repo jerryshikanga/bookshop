@@ -45,7 +45,7 @@ class Purchase(ModelGetFieldsMixin, models.Model):
         verbose_name_plural = "Purchases"
 
     def __str__(self):
-        return "Purchase for %s on %s"%(self.book.name, self.datetime_sale)
+        return "Purchase for %s on %s"%(self.book.name, self.datetime_purchase)
 
     @property
     def value(self):

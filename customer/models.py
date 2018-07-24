@@ -17,4 +17,4 @@ class Customer(ModelGetFieldsMixin, models.Model):
         return self.name
 
     def get_absolute_url(self):
-        return reverse_lazy("customer:customer_detail", kwargs={"id":self.id})
+        return reverse_lazy("customer:customer_detail", kwargs={"pk":self.pk})
