@@ -7,7 +7,7 @@
     <div class="signin-logo tx-center tx-28 tx-bold tx-inverse"><span class="tx-normal">[</span> {{ site_title }} <span class="tx-normal">]</span></div>
     <div class="tx-center mg-b-60">Create Account</div>
     <div class="text-warning">{{ form.non_field_errors }}</div>
-    <form method="post" action="{% url 'account:register_user' %}">
+    <form method="post" action="{% url 'accounts:register_user' %}">
         {% csrf_token %}
         {% for hidden_field in form.hidden_field  %}
             <span class="text-warning">{{ hidden_field.errors|safe }}</span>

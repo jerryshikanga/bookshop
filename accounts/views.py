@@ -14,7 +14,7 @@ class RegisterUser(mixins.PermissionRequiredMixin, mixins.LoginRequiredMixin, Fo
     permission_required = ("accounts.custom_can_add_user", )
     permission_denied_message = "You have to be an admin to access this page"
     form_class = UserCreateForm
-    success_url = reverse_lazy('account:register_success')
+    success_url = reverse_lazy('accounts:register_success')
     template_name = 'account/user_register_form.html'
 
     def form_valid(self, form):
