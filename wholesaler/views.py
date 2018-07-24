@@ -10,12 +10,14 @@ class CreateWholeSeller(LoginRequiredMixin, PermissionRequiredMixin, CreateView)
     permission_required = ()
     model = WholeSeller
     template_name = "wholesaler/wholesaler_create_form.html"
+    fields = ("name", "address",)
 
 
 class UpdateWholeSeller(LoginRequiredMixin, PermissionRequiredMixin, UpdateView):
     permission_required = ()
     model = WholeSeller
     template_name = "wholesaler/wholeseller_update_form.html"
+    fields = ("name", "address",)
 
 
 class DeleteWholeSeller(LoginRequiredMixin, PermissionRequiredMixin,DeleteView):
