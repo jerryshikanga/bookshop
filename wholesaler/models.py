@@ -1,9 +1,10 @@
 from django.db import models
 from django.urls import reverse_lazy
+from bookshop.globals import ModelGetFieldsMixin
 
 
 # Create your models here.
-class WholeSeller(models.Model):
+class WholeSeller(ModelGetFieldsMixin, models.Model):
     name = models.CharField(max_length=100, verbose_name="Whole Seller Name")
     address = models.CharField(max_length=250, verbose_name="Whole Seller Address")
 

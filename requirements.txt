@@ -1,2 +1,4 @@
 django
 mysqlclient
+pillow
+django-widget-tweaks

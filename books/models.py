@@ -2,12 +2,13 @@ from django.db import models
 from django.contrib.auth import get_user_model
 from django.utils import timezone
 from django.urls import reverse_lazy
+from bookshop.globals import ModelGetFieldsMixin
 
 User = get_user_model()
 
 
 # Create your models here.
-class Author(models.Model):
+class Author(ModelGetFieldsMixin, models.Model):
     name = models.CharField(max_length=100, verbose_name="Author Name")
 
     class Meta:
@@ -22,7 +23,7 @@ class Author(models.Model):
         return reverse_lazy("books:author_detail", kwargs={"id":self.id})
 
 
-class Publisher(models.Model):
+class Publisher(ModelGetFieldsMixin, models.Model):
     name = models.CharField(max_length=100, verbose_name="Publisher Name")
 
     class Meta(object):
@@ -37,7 +38,7 @@ class Publisher(models.Model):
         return reverse_lazy("books:publisher_detail", kwargs={"id":self.id})
 
 
-class Book(models.Model):
+class Book(ModelGetFieldsMixin, models.Model):
     name = models.CharField(max_length=100)
     author = models.ForeignKey(Author, on_delete=models.SET_NULL, null=True, verbose_name="Author")
     publisher = models.ForeignKey(Publisher, on_delete=models.SET_NULL, null=True, verbose_name="Publisher")

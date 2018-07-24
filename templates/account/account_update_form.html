@@ -1,0 +1,7 @@
+Update Account
+<form method="post" action="{% url 'account:account_update' request.user.id %}">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <input type="submit" value="submit">
+    <input type="reset" value="reset">
+</form>

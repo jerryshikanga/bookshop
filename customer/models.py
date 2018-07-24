@@ -1,8 +1,10 @@
 from django.db import models
+from django.urls import reverse_lazy
+from bookshop.globals import ModelGetFieldsMixin
 
 
 # Create your models here.
-class Customer(models.Model):
+class Customer(ModelGetFieldsMixin, models.Model):
     name = models.CharField(max_length=100, verbose_name="Customer Name")
     address = models.CharField(max_length=100, verbose_name="Contact Address")
 
@@ -13,3 +15,6 @@ class Customer(models.Model):
 
     def __str__(self):
         return self.name
+
+    def get_absolute_url(self):
+        return reverse_lazy("customer:customer_detail", kwargs={"id":self.id})

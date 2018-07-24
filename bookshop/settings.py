@@ -40,6 +40,11 @@ INSTALLED_APPS = [
 
     'books.apps.BooksConfig',
     'wholesaler.apps.WholesalerConfig',
+    "accounts.apps.AccountsConfig",
+    'customer.apps.CustomerConfig',
+    'transactions.apps.TransactionsConfig',
+
+    'widget_tweaks',
 ]
 
 MIDDLEWARE = [
@@ -62,6 +67,7 @@ TEMPLATES = [
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
+                'bookshop.globals.get_context',
                 'django.template.context_processors.debug',
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
