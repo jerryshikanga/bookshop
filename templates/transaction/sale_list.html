@@ -1,0 +1,86 @@
+{% extends 'base_dashboard.html' %}
+{% load static %}
+
+{% block content %}
+<div class="br-mainpanel">
+  <div class="br-pageheader pd-y-15 pd-l-20">
+    <nav class="breadcrumb pd-0 mg-0 tx-12">{{ site_title }} / Sale / List</nav>
+  </div><!-- br-pageheader -->
+  <div class="d-sm-flex align-items-center pd-t-15 pd-sm-t-25 pd-x-20 pd-sm-x-30">
+    <i class="icon ion-ios-filing-outline tx-70 lh-0 tx-gray-800"></i>
+    <div class="pd-sm-l-20">
+      <h4 class="tx-gray-800 mg-b-5"> List of Sales</h4>
+      <p class="mg-b-0">View sales</p>
+    </div>
+  </div><!-- d-flex -->
+
+  <div class="br-pagebody">
+    <!-- this is where your contents will be added -->
+      <div class="br-section-wrapper">
+        <h6 class="tx-gray-800 tx-uppercase tx-bold tx-14 mg-b-10">List of Sales</h6>
+          <div style="padding-bottom: inherit ">
+              <a href="{% url 'transactions:new_sale' %}"><button class="btn btn-info">Add Sale</button></a>
+          </div>
+          <div class="table-wrapper">
+            <table id="datatable1" class="table display responsive nowrap">
+              <thead>
+                <tr>
+                  <th class="wd-15p">Date</th>
+                    <th class="wd-15p">Book</th>
+                    <th class="wd-15p">SalesPerson</th>
+                    <th class="wd-15p">Customer</th>
+                    <th class="wd-15p">Remarks</th>
+                    <th class="wd-15p">Value</th>
+                  <th class="wd-20p">Actions</th>
+                </tr>
+              </thead>
+              <tbody>
+
+              {% for object in object_list %}
+              <tr>
+                  <th class="wd-15p">{{ object.datetime_sale | date }}</th>
+                  <th class="wd-15p">{{ object.book.name }}</th>
+                  <th class="wd-15p">{{ object.authorised_by }}</th>
+                  <th class="wd-15p">{{ object.customer.name }}</th>
+                  <th class="wd-15p">{{ object.remarks }}</th>
+                  <th class="wd-15p">{{ object.value }}</th>
+                  <th class="wd-15p">
+                      <a href="{% url 'transactions:new_sale_return' object.pk %}">Return</a> |
+                  </th>
+                </tr>
+              {% endfor %}
+
+              </tbody>
+                <thead>
+                <tr>
+                  <th class="wd-15p">Date</th>
+                    <th class="wd-15p">Book</th>
+                    <th class="wd-15p">SalesPerson</th>
+                    <th class="wd-15p">Customer</th>
+                    <th class="wd-15p">Remarks</th>
+                    <th class="wd-15p">Value</th>
+                  <th class="wd-20p">Actions</th>
+                </tr>
+              </thead>
+            </table>
+        </div>
+      </div>
+  </div><!-- br-pagebody -->
+
+</div><!-- br-mainpanel -->
+{% endblock %}
+
+{% block scripts %}
+    <script type="text/javascript" src="{% static "lib/datatables/jquery.dataTables.js" %}"></script>
+    <script type="text/javascript" src="{% static 'lib/datatables-responsive/dataTables.responsive.js' %}"></script>
+<script type="text/javascript">
+$('#datatable1').DataTable({
+  responsive: true,
+  language: {
+    searchPlaceholder: 'Search...',
+    sSearch: '',
+    lengthMenu: '_MENU_ items/page',
+  }
+});
+</script>
+{% endblock %}

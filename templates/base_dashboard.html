@@ -1,0 +1,249 @@
+{% load staticfiles %}
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Meta -->
+    <meta name="description" content="{{ site_description }}">
+    <meta name="author" content="{{ site_author }}">
+
+    <title>{{ site_title }}</title>
+
+    <!-- vendor css -->
+    <link href="{% static 'lib/font-awesome/css/font-awesome.css' %}" rel="stylesheet">
+    <link href="{% static 'lib/Ionicons/css/ionicons.css' %}" rel="stylesheet">
+    <link href="{% static 'lib/perfect-scrollbar/css/perfect-scrollbar.css' %}" rel="stylesheet">
+    <link href="{% static 'lib/jquery-switchbutton/jquery.switchButton.css' %}" rel="stylesheet">
+
+    <!-- Bracket CSS -->
+    <link rel="stylesheet" href="{% static 'css/bracket.css' %}">
+
+{#      datatables stylesheets#}
+  <link href="{% static 'lib/datatables/jquery.dataTables.css' %}" rel="stylesheet">
+{#      select2 stylesheet#}
+    <link rel="stylesheet" href="{% static 'lib/select2/css/select2.min.css' %}">
+  </head>
+
+  <body>
+
+    <!-- ########## START: LEFT PANEL ########## -->
+    <div class="br-logo"><a href=""><span>[</span>{{ site_title }}<span>]</span></a></div>
+    <div class="br-sideleft overflow-y-auto">
+      <label class="sidebar-label pd-x-15 mg-t-20">Navigation</label>
+      <div class="br-sideleft-menu">
+        <a href="{% url 'index' %}" class="br-menu-link">
+          <div class="br-menu-item">
+            <i class="menu-item-icon icon ion-ios-home-outline tx-22"></i>
+            <span class="menu-item-label">Dashboard</span>
+          </div><!-- menu-item -->
+        </a><!-- br-menu-link -->
+
+        <a href="{% url 'books:list_book' %}" class="br-menu-link">
+          <div class="br-menu-item">
+            <i class="menu-item-icon icon ion-ios-filing-outline tx-24"></i>
+            <span class="menu-item-label">Books List</span>
+          </div><!-- menu-item -->
+        </a><!-- br-menu-link -->
+
+
+        <a href="{% url 'books:author_list' %}" class="br-menu-link">
+          <div class="br-menu-item">
+            <i class="menu-item-icon icon ion-ios-filing-outline tx-24"></i>
+            <span class="menu-item-label">Authors</span>
+          </div><!-- menu-item -->
+        </a><!-- br-menu-link -->
+
+
+        <a href="{% url 'books:publisher_list' %}" class="br-menu-link">
+          <div class="br-menu-item">
+            <i class="menu-item-icon icon ion-ios-filing-outline tx-24"></i>
+            <span class="menu-item-label">Publishers</span>
+          </div><!-- menu-item -->
+        </a><!-- br-menu-link -->
+
+
+        <a href="{% url 'customer:customer_list' %}" class="br-menu-link">
+          <div class="br-menu-item">
+            <i class="menu-item-icon ion-ios-people tx-24"></i>
+            <span class="menu-item-label">Customers </span>
+          </div><!-- menu-item -->
+        </a><!-- br-menu-link -->
+
+
+        <a href="{% url 'whole_seller:whole_seller_list' %}" class="br-menu-link">
+          <div class="br-menu-item">
+              <i class="fa fa-user"></i>
+            <span class="menu-item-label">WholeSalers </span>
+          </div><!-- menu-item -->
+        </a><!-- br-menu-link -->
+
+
+          <a href="{% url 'transactions:sale_list' %}" class="br-menu-link">
+          <div class="br-menu-item">
+              <i class="fa fa-user"></i>
+            <span class="menu-item-label">Sales</span>
+          </div><!-- menu-item -->
+        </a><!-- br-menu-link -->
+
+          <a href="{% url 'transactions:purchase_list' %}" class="br-menu-link">
+          <div class="br-menu-item">
+              <i class="fa fa-user"></i>
+            <span class="menu-item-label">Purchases </span>
+          </div><!-- menu-item -->
+        </a><!-- br-menu-link -->
+
+
+          <a href="{% url 'transactions:sale_return_list' %}" class="br-menu-link">
+          <div class="br-menu-item">
+              <i class="fa fa-user"></i>
+            <span class="menu-item-label">Sale Returns </span>
+          </div><!-- menu-item -->
+        </a><!-- br-menu-link -->
+
+
+        <a href="{% url 'transactions:purchase_return_list' %}" class="br-menu-link">
+          <div class="br-menu-item">
+              <i class="fa fa-user"></i>
+            <span class="menu-item-label">Purchase Returns </span>
+          </div><!-- menu-item -->
+        </a><!-- br-menu-link -->
+
+        <a href="{% url 'accounts:register_user' %}" class="br-menu-link">
+          <div class="br-menu-item">
+              <i class="fa fa-user"></i>
+            <span class="menu-item-label">Register user </span>
+          </div><!-- menu-item -->
+        </a><!-- br-menu-link -->
+
+      </div><!-- br-sideleft-menu -->
+
+      <label class="sidebar-label pd-x-15 mg-t-25 mg-b-20 tx-info op-9">Information Summary</label>
+
+      <div class="info-list">
+        <div class="d-flex align-items-center justify-content-between pd-x-15">
+          <div>
+            <p class="tx-10 tx-roboto tx-uppercase tx-spacing-1 tx-white op-3 mg-b-2 space-nowrap">Number of Sales Today</p>
+            <h5 class="tx-lato tx-white tx-normal mg-b-0">{{ sales_today.count }}</h5>
+          </div>
+        </div><!-- d-flex -->
+
+        <div class="d-flex align-items-center justify-content-between pd-x-15 mg-t-20">
+          <div>
+            <p class="tx-10 tx-roboto tx-uppercase tx-spacing-1 tx-white op-3 mg-b-2 space-nowrap">Number of Purchases Today</p>
+            <h5 class="tx-lato tx-white tx-normal mg-b-0">{{ purchases_today.count }}</h5>
+          </div>
+        </div><!-- d-flex -->
+
+        <div class="d-flex align-items-center justify-content-between pd-x-15 mg-t-20">
+          <div>
+            <p class="tx-10 tx-roboto tx-uppercase tx-spacing-1 tx-white op-3 mg-b-2 space-nowrap">Total Books</p>
+            <h5 class="tx-lato tx-white tx-normal mg-b-0">{{ books.count }}</h5>
+          </div>
+        </div><!-- d-flex -->
+
+        <div class="d-flex align-items-center justify-content-between pd-x-15 mg-t-20">
+          <div>
+            <p class="tx-10 tx-roboto tx-uppercase tx-spacing-1 tx-white op-3 mg-b-2 space-nowrap">Customer</p>
+            <h5 class="tx-lato tx-white tx-normal mg-b-0">{{ customer.count }}</h5>
+          </div>
+        </div><!-- d-flex -->
+      </div><!-- info-lst -->
+
+      <br>
+    </div><!-- br-sideleft -->
+    <!-- ########## END: LEFT PANEL ########## -->
+
+    <!-- ########## START: HEAD PANEL ########## -->
+    <div class="br-header">
+      <div class="br-header-left">
+        <div class="navicon-left hidden-md-down"><a id="btnLeftMenu" href=""><i class="icon ion-navicon-round"></i></a></div>
+        <div class="navicon-left hidden-lg-up"><a id="btnLeftMenuMobile" href=""><i class="icon ion-navicon-round"></i></a></div>
+        <div class="input-group hidden-xs-down wd-170 transition">
+          <input id="searchbox" type="text" class="form-control" placeholder="Search">
+          <span class="input-group-btn">
+            <button class="btn btn-secondary" type="button"><i class="fa fa-search"></i></button>
+          </span>
+        </div><!-- input-group -->
+      </div><!-- br-header-left -->
+      <div class="br-header-right">
+        <nav class="nav">
+          <div class="dropdown">
+            <a href="" class="nav-link nav-link-profile" data-toggle="dropdown">
+              <span class="logged-name hidden-md-down">{{ request.user.get_full_name }}</span>
+              <img src="{% static 'media' %}/{{ request.user.account.picture }}" class="wd-32 rounded-circle" alt="">
+              <span class="square-10 bg-success"></span>
+            </a>
+            <div class="dropdown-menu dropdown-menu-header wd-200">
+              <ul class="list-unstyled user-profile-nav">
+                <li><a href="{% url 'accounts:profile' %}"><i class="icon ion-ios-person"></i> Edit Profile</a></li>
+                <li><a href="{% url 'password_change' %}"><i class="icon ion-ios-gear"></i> Change Password</a></li>
+                <li><a href="{% url 'logout' %}"><i class="icon ion-power"></i> Sign Out</a></li>
+              </ul>
+            </div><!-- dropdown-menu -->
+          </div><!-- dropdown -->
+        </nav>
+
+      </div><!-- br-header-right -->
+    </div><!-- br-header -->
+    <!-- ########## END: HEAD PANEL ########## -->
+
+    {% block content %}
+    
+    {% endblock %}
+
+    <script src="{% static 'lib/jquery/jquery.js' %}"></script>
+    <script src="{% static 'lib/popper.js/popper.js' %}"></script>
+    <script src="{% static 'lib/bootstrap/bootstrap.js' %}"></script>
+    <script src="{% static 'lib/perfect-scrollbar/js/perfect-scrollbar.jquery.js' %}"></script>
+    <script src="{% static 'lib/moment/moment.js' %}"></script>
+    <script src="{% static 'lib/jquery-ui/jquery-ui.js' %}"></script>
+    <script src="{% static 'lib/jquery-switchbutton/jquery.switchButton.js' %}"></script>
+    <script src="{% static 'lib/peity/jquery.peity.js' %}"></script>
+    <script src="{% static 'lib/jquery.sparkline.bower/jquery.sparkline.min.js' %}"></script>
+    <script src="{% static 'lib/d3/d3.js' %}"></script>
+
+
+    <script src="{% static 'js/bracket.js' %}"></script>
+    <script src="{% static 'js/ResizeSensor.js' %}"></script>
+    <script src="{% static 'js/dashboard.js' %}"></script>
+    <script>
+      $(function(){
+        'use strict'
+
+        // FOR DEMO ONLY
+        // menu collapsed by default during first page load or refresh with screen
+        // having a size between 992px and 1299px. This is intended on this page only
+        // for better viewing of widgets demo.
+        $(window).resize(function(){
+          minimizeMenu();
+        });
+
+        minimizeMenu();
+
+        function minimizeMenu() {
+          if(window.matchMedia('(min-width: 992px)').matches && window.matchMedia('(max-width: 1299px)').matches) {
+            // show only the icons and hide left menu label by default
+            $('.menu-item-label,.menu-item-arrow').addClass('op-lg-0-force d-lg-none');
+            $('body').addClass('collapsed-menu');
+            $('.show-sub + .br-menu-sub').slideUp();
+          } else if(window.matchMedia('(min-width: 1300px)').matches && !$('body').hasClass('collapsed-menu')) {
+            $('.menu-item-label,.menu-item-arrow').removeClass('op-lg-0-force d-lg-none');
+            $('body').removeClass('collapsed-menu');
+            $('.show-sub + .br-menu-sub').slideDown();
+          }
+        }
+      });
+    </script>
+
+
+  {% block scripts %}
+
+  {% endblock %}
+
+
+  </body>
+</html>

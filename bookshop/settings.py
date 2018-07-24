@@ -23,9 +23,12 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = 'g12jcqdd)d1(lc2lh1a@%l&lnm+$nj-$ml8o6plxmx!t*q0o+4'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = [
+    'localhost',
+    'shikanga.pythonanaywhere.com',
+]
 
 
 # Application definition
@@ -39,6 +42,12 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
 
     'books.apps.BooksConfig',
+    'wholesaler.apps.WholesalerConfig',
+    "accounts.apps.AccountsConfig",
+    'customer.apps.CustomerConfig',
+    'transactions.apps.TransactionsConfig',
+
+    'widget_tweaks',
 ]
 
 MIDDLEWARE = [
@@ -61,6 +70,7 @@ TEMPLATES = [
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
+                'bookshop.globals.get_context',
                 'django.template.context_processors.debug',
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
@@ -121,3 +131,7 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/2.0/howto/static-files/
 
 STATIC_URL = '/static/'
+STATIC_ROOT = os.path.join(BASE_DIR, 'static')
+
+
+MEDIA_ROOT = os.path.join(BASE_DIR, 'static', 'media')

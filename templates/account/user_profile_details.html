@@ -1,0 +1,75 @@
+{% extends 'base_dashboard.html' %}
+{% load static %}
+
+{% block content %}
+<div class="br-mainpanel">
+  <div class="br-pageheader pd-y-15 pd-l-20">
+    <nav class="breadcrumb pd-0 mg-0 tx-12">{{ site_title }} / Accounts / Details</nav>
+  </div><!-- br-pageheader -->
+  <div class="d-sm-flex align-items-center pd-t-15 pd-sm-t-25 pd-x-20 pd-sm-x-30">
+    <i class="icon ion-ios-filing-outline tx-70 lh-0 tx-gray-800"></i>
+    <div class="pd-sm-l-20">
+      <h4 class="tx-gray-800 mg-b-5">Account Details</h4>
+    </div>
+  </div><!-- d-flex -->
+
+  <div class="br-pagebody">
+    <!-- this is where your contents will be added -->
+      <div class="br-section-wrapper">
+        <h6 class="tx-gray-800 tx-uppercase tx-bold tx-14 mg-b-10">Details for {{ account }}</h6>
+          <div id="accordion" class="accordion" role="tablist" aria-multiselectable="true">
+              <div class="card">
+                <div class="card-header" role="tab" id="headingOne">
+                    <h6 class="mg-b-0">
+                        <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne" class="tx-gray-800 transition">
+                            {{ account }} Picture
+                        </a>
+                    </h6>
+                </div><!-- card-header -->
+
+                <div id="collapseOne" class="collapse show" role="tabpanel" aria-labelledby="headingOne">
+                    <div class="card-block pd-20">
+                        <img src="{% static 'media/' %}{{ account.picture }}" alt="{{ account }}" width="25%" height="auto">
+                    </div>
+                </div>
+            </div><!-- card -->
+            <div class="card">
+                <div class="card-header" role="tab" id="headingOne">
+                    <h6 class="mg-b-0">
+                        <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne" class="tx-gray-800 transition">
+                            Telephone
+                        </a>
+                    </h6>
+                </div><!-- card-header -->
+
+                <div id="collapseOne" class="collapse show" role="tabpanel" aria-labelledby="headingOne">
+                    <div class="card-block pd-20">
+                        {{ account.telephone }}
+                    </div>
+                </div>
+            </div><!-- card -->
+            <div class="card">
+                <div class="card-header" role="tab" id="headingOne">
+                    <h6 class="mg-b-0">
+                        <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne" class="tx-gray-800 transition">
+                            Physical Address
+                        </a>
+                    </h6>
+                </div><!-- card-header -->
+
+                <div id="collapseOne" class="collapse show" role="tabpanel" aria-labelledby="headingOne">
+                    <div class="card-block pd-20">
+                        {{ account.address }}
+                    </div>
+                </div>
+            </div><!-- card -->
+          </div><!-- accordion -->
+      </div>
+  </div><!-- br-pagebody -->
+
+</div><!-- br-mainpanel -->
+{% endblock %}
+
+{% block scripts %}
+
+{% endblock %}

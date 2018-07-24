@@ -1,6 +1,6 @@
 from django.urls import reverse_lazy
-from django.views.generic import ListView, DetailView
-from django.views.generic.edit import CreateView, UpdateView, DeleteView
+from django.views.generic import ListView, DetailView, DeleteView
+from django.views.generic.edit import CreateView, UpdateView
 from django.contrib.auth.mixins import PermissionRequiredMixin, LoginRequiredMixin
 from .models import Author, Publisher, Book
 
@@ -10,12 +10,14 @@ class CreateAuthor(LoginRequiredMixin, PermissionRequiredMixin, CreateView):
     permission_required = ()
     model = Author
     template_name = "books/author_create_form.html"
+    fields = ("name", )
 
 
 class UpdateAuthor(LoginRequiredMixin, PermissionRequiredMixin, UpdateView):
     permission_required = ()
     model = Author
     template_name = "books/author_update_form.html"
+    fields = ("name",)
 
 
 class DeleteAuthor(LoginRequiredMixin, PermissionRequiredMixin, DeleteView):
@@ -40,12 +42,14 @@ class CreateBook(LoginRequiredMixin, PermissionRequiredMixin, CreateView):
     permission_required = ()
     model = Book
     template_name = "books/book_create_form.html"
+    fields = ("name", "author", "publisher", "isbn", "buying_price", "selling_price")
 
 
 class BookUpdate(LoginRequiredMixin, PermissionRequiredMixin, UpdateView):
     permission_required = ()
     model = Book
     template_name = "books/book_update_form.html"
+    fields = ("name", "author", "publisher", "isbn", "quantity", "buying_price", "selling_price")
 
 
 class BookDelete(LoginRequiredMixin, PermissionRequiredMixin, DeleteView):
@@ -70,12 +74,14 @@ class PublisherCreate(LoginRequiredMixin, PermissionRequiredMixin, CreateView):
     permission_required = ()
     model = Publisher
     template_name = "books/publisher_create_form.html"
+    fields = ("name",)
 
 
 class PublisherUpdate(LoginRequiredMixin, PermissionRequiredMixin, UpdateView):
     permission_required = ()
     model = Publisher
     template_name = "books/publisher_update_form.html"
+    fields = ("name",)
 
 
 class PublisherDelete(LoginRequiredMixin, PermissionRequiredMixin, DeleteView):
