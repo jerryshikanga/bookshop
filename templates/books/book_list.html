@@ -4,39 +4,56 @@
 {% block content %}
 <div class="br-mainpanel">
   <div class="br-pageheader pd-y-15 pd-l-20">
-    <nav class="breadcrumb pd-0 mg-0 tx-12">{{ site_title }} / Food / List</nav>
+    <nav class="breadcrumb pd-0 mg-0 tx-12">{{ site_title }} / Book / List</nav>
   </div><!-- br-pageheader -->
   <div class="d-sm-flex align-items-center pd-t-15 pd-sm-t-25 pd-x-20 pd-sm-x-30">
     <i class="icon ion-ios-filing-outline tx-70 lh-0 tx-gray-800"></i>
     <div class="pd-sm-l-20">
-      <h4 class="tx-gray-800 mg-b-5">Food List</h4>
-      <p class="mg-b-0">Add, Update and Delete Food items</p>
+      <h4 class="tx-gray-800 mg-b-5">Book List</h4>
+      <p class="mg-b-0">Add, Update and Delete Books</p>
     </div>
   </div><!-- d-flex -->
 
   <div class="br-pagebody">
     <!-- this is where your contents will be added -->
       <div class="br-section-wrapper">
-        <h6 class="tx-gray-800 tx-uppercase tx-bold tx-14 mg-b-10">List of Foods</h6>
+        <h6 class="tx-gray-800 tx-uppercase tx-bold tx-14 mg-b-10">List of Books</h6>
           <div style="padding-bottom: inherit ">
-              <a href="{% url 'food:create' %}"><button class="btn btn-info">Add Food</button></a>
+              <a href="{% url 'books:create_book' %}"><button class="btn btn-info">Add Books</button></a>
           </div>
           <div class="table-wrapper">
             <table id="datatable1" class="table display responsive nowrap">
               <thead>
                 <tr>
                   <th class="wd-15p">Name</th>
+                    <th class="wd-15p">Author</th>
+                    <th class="wd-15p">Publisher</th>
+                    <th class="wd-15p">ISBN</th>
+                    <th class="wd-15p">Quantity</th>
+                    <th class="wd-15p">Date Added</th>
+                    <th class="wd-15p">Staff Adding</th>
+                    <th class="wd-15p">Buying Price</th>
+                    <th class="wd-15p">Selling Price</th>
                   <th class="wd-20p">Actions</th>
                 </tr>
               </thead>
               <tbody>
 
-              {% for author in author_list %}
+              {% for book in book_list %}
               <tr>
-                  <th class="wd-15p">{{ author.name }}</th>
+                  <th class="wd-15p">{{ book.name }}</th>
+                  <th class="wd-15p">{{ book.author.name }}</th>
+                  <th class="wd-15p">{{ book.publisher.name }}</th>
+                  <th class="wd-15p">{{ book.isbn }}</th>
+                  <th class="wd-15p">{{ book.quantity }}</th>
+                  <th class="wd-15p">{{ book.datetime_added | date }}</th>
+                  <th class="wd-15p">{{ book.added_by.get_full_name }}</th>
+                  <th class="wd-15p">{{ book.buying_price }}</th>
+                  <th class="wd-15p">{{ book.selling_price }}</th>
+
                   <th class="wd-15p">
-                      <a href="{% url 'food:increase_reserves' food.id %}">Increase Reserves</a> |
-                      <a href="{% url 'distribution:allocate_distribution' food.id %}">Allocate</a>
+                      <a href="{% url 'books:update_book' book.pk %}">Update</a> |
+                      <a href="{% url 'books:delete_book' book.pk %}">Delete</a>
                   </th>
                 </tr>
               {% endfor %}
@@ -45,6 +62,14 @@
                 <thead>
                 <tr>
                   <th class="wd-15p">Name</th>
+                    <th class="wd-15p">Author</th>
+                    <th class="wd-15p">Publisher</th>
+                    <th class="wd-15p">ISBN</th>
+                    <th class="wd-15p">Quantity</th>
+                    <th class="wd-15p">Date Added</th>
+                    <th class="wd-15p">Staff Adding</th>
+                    <th class="wd-15p">Buying Price</th>
+                    <th class="wd-15p">Selling Price</th>
                   <th class="wd-20p">Actions</th>
                 </tr>
               </thead>
