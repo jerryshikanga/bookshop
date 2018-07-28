@@ -1,6 +1,6 @@
 from django import forms
 from django.contrib.auth import get_user_model
-from django.contrib.auth.models import Group
+from django.contrib.auth.models import Group, Permission
 from .models import Account
 
 User = get_user_model()
@@ -16,7 +16,9 @@ class UserCreateForm(forms.Form):
     password2 = forms.CharField(max_length=100, required=True, widget=forms.PasswordInput,
                                 label="Repeat the password entered")
     address = forms.CharField(max_length=1000, required=True, widget=forms.Textarea)
-    group = forms.ModelChoiceField(queryset=Group.objects.all(), required=False)
+
+    # group = forms.ModelChoiceField(queryset=Group.objects.all(), required=False) # removed group in favor of permissions which can be customised based in individual user
+    permissions = forms.ModelMultipleChoiceField(queryset=Permission.objects.all(), label="Choose user permissions", required=False)
 
     def clean_password2(self):
         password1 = self.cleaned_data.get("password1")
@@ -40,9 +42,13 @@ class UserCreateForm(forms.Form):
             username=form_data.get("email"),
         )
         user.set_password(form_data.get("password1"))
-        group = form_data.get("group")
-        if group and group is not None :
-            user.groups.add(group)
+
+        # did away with groups in favor of permissions
+        # group = form_data.get("group")
+        # if group and group is not None :
+        #     user.groups.add(group)
+        permissions = form_data.get("permissions", None)
+        [user.user_permissions.add(permission) for permission in permissions]
         user.save()
 
         account = Account.objects.create(

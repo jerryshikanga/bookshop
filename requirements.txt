@@ -2,3 +2,5 @@ django
 mysqlclient
 pillow
 django-widget-tweaks
+beautifulsoup4
+requests
